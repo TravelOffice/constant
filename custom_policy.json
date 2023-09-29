@@ -1,0 +1,261 @@
+{
+    "LambdaStandardRole": [
+      {
+        "Action": [
+          "ec2:DescribeInstances",
+          "ec2:CreateNetworkInterface",
+          "ec2:AttachNetworkInterface",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:DeleteNetworkInterface",
+          "autoscaling:CompleteLifecycleAction"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      },
+      {
+        "Action": [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Effect": "Allow",
+        "Resource" : "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "xray:PutTraceSegments",
+          "xray:PutTelemetryRecords",
+          "xray:GetSamplingRules",
+          "xray:GetSamplingTargets",
+          "xray:GetSamplingStatisticSummaries"
+        ],
+        "Resource": [
+            "*"
+        ]
+      }
+    ],
+    "LambdaInvokeAsync": [
+      {
+        "Action": [
+          "lambda:InvokeFunction",
+          "lambda:InvokeAsync"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+  
+      }
+    ],
+    "StandardStepFunction": [
+      {
+        "Action": [
+          "events:PutTargets",
+          "events:PutRule",
+          "events:DescribeRule"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:events:ap-southeast-1:249593777629:rule/StepFunctionsGetEventsForStepFunctionsExecutionRule"
+  
+      }
+    ],
+    "ExecuteEcsTask": [
+      {
+        "Action": [
+            "ecs:RunTask",
+            "iam:PassRole"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ],
+    "CognitoPowerUser": [
+      {
+        "Action": [
+          "cognito-idp:AdminCreateUser",
+          "cognito-idp:ListUsers"
+        ],
+        "Effect": "Allow",
+        "Resource": "arn:aws:cognito-idp:*:249593777629:userpool/*"
+      }
+    ],
+    "SecretManagerRead": [
+      {
+        "Action": [
+          "secretsmanager:GetResourcePolicy",
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret",
+          "secretsmanager:ListSecretVersionIds"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ],
+    "DynamoTableReadWrite": [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "dynamodb:PutItem",
+          "dynamodb:GetItem",
+          "dynamodb:Query",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem",
+          "dynamodb:BatchGetItem",
+          "dynamodb:BatchWriteItem"
+        ],
+        "Resource" : "*"
+      }
+    ],
+    "SESSendMail": [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "ses:SendEmail",
+          "ses:SendTemplatedEmail",
+          "ses:SendRawEmail",
+          "ses:SendBulkTemplatedEmail"
+        ],
+        "Resource" : "*"
+      }
+    ],
+    "S3UploadOnly": [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:PutObject"
+        ],
+        "Resource" : "*"
+      }
+    ],
+    "S3DeleteObjectOnly": [
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:DeleteObject"
+        ],
+        "Resource" : "*"
+      }
+    ],
+    "ExecuteStepFunction": [
+      {
+        "Action": [
+            "states:StartExecution"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ],
+    "EcsTaskStandardRole": [
+      {
+        "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      },
+      {
+          "Action": [
+              "states:SendTaskSuccess",
+              "states:SendTaskFailure"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+      },
+      {
+          "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:ListBucket",
+              "s3:ListBucketVersions",
+              "s3:DeleteObject",
+              "s3:DeleteObjectVersion"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+      }
+    ],
+    "Route53ChangeRecord": [
+      {
+        "Action": [
+            "route53:ChangeResourceRecordSets",
+            "route53:GetHostedZone",
+            "route53:ListResourceRecordSets",
+            "route53:GetChange"
+        ],
+        "Effect": "Allow",
+        "Resource": "*"
+      }
+    ],
+    "SQSLambdaTriggerRole": [
+      {
+        "Action": [
+          "sqs:ChangeMessageVisibility",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes",
+          "sqs:ReceiveMessage"
+        ],
+        "Effect": "Allow",
+        "Resource" : ["arn:aws:sqs:*"]
+      },
+      {
+        "Action": ["lambda:InvokeFunction"],
+        "Effect": "Allow",
+        "Resource": ["arn:aws:lambda:*"]
+      }
+    ],
+    "SQSSendMessage": [
+      {
+        "Action": [
+          "sqs:SendMessage"
+        ],
+        "Effect": "Allow",
+        "Resource": ["arn:aws:sqs:*"]
+      }
+    ],
+    "SESSendEmail": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ses:SendEmail",
+          "ses:SendRawEmail",
+          "ses:SendTemplatedEmail"
+        ],
+        "Resource": ["arn:aws:ses:*"]
+       }
+    ],
+    "SfnSendTaskToken": [
+      {
+        "Effect": "Allow",
+        "Action": [
+            "states:SendTaskSuccess",
+            "states:SendTaskFailure"
+        ],
+        "Resource": ["arn:aws:states:*"]
+      }
+    ],
+    "EventBridge": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "events:PutRule",
+          "events:PutTargets",
+          "events:ListTargetsByRule",
+          "events:RemoveTargets",
+          "events:DeleteRule"
+        ],
+        "Resource": "*"
+      }
+    ],
+    "LambdaDynamoDBStreamRole": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "dynamodb:GetRecords",
+          "dynamodb:GetShardIterator",
+          "dynamodb:DescribeStream",
+          "dynamodb:ListStreams"
+        ],
+        "Resource": "*"
+      }
+    ]
+  }
